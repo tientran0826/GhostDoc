@@ -1,0 +1,18 @@
+name: ghostdoc-project
+
+include:
+  - docker/infra/postgres.yml
+  - docker/infra/redis.yml
+  - docker/infra/clickhouse.yml
+  - docker/infra/minio.yml
+  - docker/observability/langfuse.yml
+  - docker/observability/langfuse-worker.yml
+
+volumes:
+    postgres_data:
+    clickhouse_data:
+    minio_data:
+    redis_data:
+networks:
+  ghostdoc:
+    external: true

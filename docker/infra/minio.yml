@@ -1,0 +1,33 @@
+services:
+  minio:
+    image: minio/minio
+    restart: always
+
+    command: server /data --console-address ":9001"
+
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+
+    ports:
+      - "9090:9000"
+      - "9091:9001"
+
+    volumes:
+      - minio_data:/data
+
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
+
+    networks:
+        - ghostdoc
+
+networks:
+  ghostdoc:
+    external: true
+
+volumes:
+  minio_data:

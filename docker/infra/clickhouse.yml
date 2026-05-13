@@ -1,0 +1,34 @@
+services:
+  clickhouse:
+    image: docker.io/clickhouse/clickhouse-server
+    restart: always
+    user: "101:101"
+    environment:
+      CLICKHOUSE_DB: langfuse
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: clickhouse_pass
+
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8123/ping || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 1s
+
+
+    networks:
+      - ghostdoc
+
+networks:
+  ghostdoc:
+    external: true
+
+volumes:
+  clickhouse_data:
