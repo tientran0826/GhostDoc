@@ -1,0 +1,2 @@
+CREATE DATABASE langfuse;
+CREATE DATABASE ghostdoc;

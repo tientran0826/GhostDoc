@@ -16,7 +16,7 @@ services:
       environment:
         NEXTAUTH_URL: http://localhost:3000
 
-        DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@$postgres:5432/${POSTGRES_DB}
+        DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
 
         NEXTAUTH_SECRET: mysecret
         SALT: mysalt
