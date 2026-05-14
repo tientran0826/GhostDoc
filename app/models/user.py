@@ -1,7 +1,7 @@
 import uuid
 
 from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
 
@@ -14,3 +14,4 @@ class User(Base):
     )
     email: Mapped[str] = mapped_column(String, unique=True, index=True)
     hashed_password: Mapped[str] = mapped_column(String)
+    documents = relationship("Document", backref="user", cascade="all, delete-orphan")
